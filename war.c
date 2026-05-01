@@ -16,11 +16,24 @@
 
 // Inclusão das bibliotecas padrão necessárias para entrada/saída, alocação de memória, manipulação de strings e tempo.
 
+#include <stdio.h>
+#include <string.h>
+
 // --- Constantes Globais ---
 // Definem valores fixos para o número de territórios, missões e tamanho máximo de strings, facilitando a manutenção.
 
+#define QNT_TERRITORIO 5
+#define TAM_STRING 30
+
 // --- Estrutura de Dados ---
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
+
+typedef struct 
+{
+    char nome[TAM_STRING];
+    char cor[10];
+    int tropas;
+}territorio;
 
 // --- Protótipos das Funções ---
 // Declarações antecipadas de todas as funções que serão usadas no programa, organizadas por categoria.
@@ -37,6 +50,39 @@ int main() {
     // - Inicializa a semente para geração de números aleatórios com base no tempo atual.
     // - Aloca a memória para o mapa do mundo e verifica se a alocação foi bem-sucedida.
     // - Preenche os territórios com seus dados iniciais (tropas, donos, etc.).
+    territorio ter[QNT_TERRITORIO]; 
+
+    printf("======== Virtual War ========\n");
+    printf("Vamos cadastrar os territorios...\n");
+
+    for(int i = 0;i < QNT_TERRITORIO;i++)
+    {
+    printf("Territorio N%i.\n",i+1);
+
+    printf("Digite o nome do territorio:\n");
+    fgets(ter[i].nome,TAM_STRING,stdin);
+    printf("Digite a cor do seu exercito:\n");
+    fgets(ter[i].cor,TAM_STRING,stdin);
+
+    ter[i].nome[strcspn(ter[i].nome, "\n")] = '\0';
+    ter[i].cor[strcspn(ter[i].cor, "\n")] = '\0';
+
+    printf("Digite a quantidade de tropas do territorio:\n");
+    scanf("%i",&ter[i].tropas);
+    getchar();
+
+    }
+
+    printf("==================================\n");
+
+    for (int i = 0;i < QNT_TERRITORIO; i++)
+    {
+        printf("Territorio N%i.\n",i+1);
+    printf("> NOME: %s.\n",ter[i].nome);
+    printf("> EXERCITO: Comando %s.\n",ter[i].cor);
+    printf("> N DE TROPAS: %i.\n",ter[i].tropas);
+    printf("==================================\n");
+    }
     // - Define a cor do jogador e sorteia sua missão secreta.
 
     // 2. Laço Principal do Jogo (Game Loop):
